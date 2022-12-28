@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <AppSettings>
+    <Setting Name="SettingName" Value="SettingValue" />
+  </AppSettings>
+  <UserSettings>
+    <!-- Tokens: *Documents, *Common, *Desktop, *Roaming, *Local -->
+    <Default>
+      <Setting Name="SettingName" Value="SettingValue" />
+    </Default>
+  </UserSettings>
+</Settings>

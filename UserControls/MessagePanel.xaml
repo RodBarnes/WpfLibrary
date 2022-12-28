@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Common.UserControls.MessagePanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" 
+    d:DesignHeight="100" d:DesignWidth="400"
+    Visibility="Collapsed" >
+    <Grid>
+        <Grid Background="Black" Opacity="0.5"/>
+        <Border
+		    MinWidth="50" MinHeight="50"
+		    Background="LightCoral" 
+		    BorderBrush="Black"
+		    BorderThickness="1" 
+		    HorizontalAlignment="Center"
+		    VerticalAlignment="Center">
+            <StackPanel>
+                <StackPanel Width="400" Margin="5,5,5,0">
+                    <TextBox x:Name="Title" TextWrapping="Wrap" MinHeight="16" Background="LightPink" HorizontalAlignment="Center" />
+                    <TextBox x:Name="Message" IsReadOnly="True" TextWrapping="Wrap" MinHeight="42" Background="LightPink" HorizontalAlignment="Stretch" />
+                </StackPanel>
+                <DockPanel >
+                    <CheckBox x:Name="CheckBoxConfirm" Checked="CheckBoxConfirm_Checked" Unchecked="CheckBoxConfirm_Unchecked" FontStyle="Italic" FontWeight="Bold" HorizontalAlignment="Center" />
+                </DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="ButtonProceed" Click="ButtonProceed_Click" Width="50" Margin="5,5" />
+                    <Button x:Name="ButtonHalt" Click="ButtonHalt_Click" Width="50" Margin="5,5" />
+                </StackPanel>
+                <TextBox Visibility="Collapsed" Text="{Binding MessageResponse, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
