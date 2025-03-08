@@ -85,39 +85,46 @@ namespace Common.ViewModels
                         }
                         else
                         {
-                            // Check if the default is a token
-                            var token = node.Attributes["Value"].Value;
-                            if (token[0] == '*')
+                            var valType = node.Attributes["Type"].Value;
+                            //var valName = node.Attributes["Name"].Value;
+                            var val = node.Attributes["Value"].Value;
+                            switch (valType)
                             {
-                                // Derive the user-specific default
-                                switch(token)
-                                {
-                                    case "*Documents":
-                                        prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-                                        break;
-                                    case "*Common":
-                                        prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments));
-                                        break;
-                                    case "*Roaming":
-                                        prop.SetValue(this, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\{AssyInfo.Company}\{AssyInfo.Product}");
-                                        break;
-                                    case "*Local":
-                                        prop.SetValue(this, $@"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\{AssyInfo.Company}\{AssyInfo.Product}");
-                                        break;
-                                    case "*Personal":
-                                        prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.Personal));
-                                        break;
-                                    case "*Desktop":
-                                        prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                            else
-                            {
-                                // Use standard default setting
-                                prop.SetValue(this, node.Attributes["Value"].Value);
+                                case "token":
+                                    // Derive the user-specific default
+                                    switch (val)
+                                    {
+                                        case "*Documents":
+                                            prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                                            break;
+                                        case "*Common":
+                                            prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments));
+                                            break;
+                                        case "*Roaming":
+                                            prop.SetValue(this, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\{AssyInfo.Company}\{AssyInfo.Product}");
+                                            break;
+                                        case "*Local":
+                                            prop.SetValue(this, $@"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\{AssyInfo.Company}\{AssyInfo.Product}");
+                                            break;
+                                        case "*Personal":
+                                            prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+                                            break;
+                                        case "*Desktop":
+                                            prop.SetValue(this, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    break;
+                                case "boolean":
+                                    prop.SetValue(this, val);
+                                    break;
+                                case "int":
+                                    int.TryParse(val, out int num);
+                                    prop.SetValue(this, num);
+                                    break;
+                                default:
+                                    break;
                             }
                         }
                     }
