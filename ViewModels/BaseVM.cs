@@ -85,7 +85,12 @@ namespace Common.ViewModels
                         }
                         else
                         {
-                            var valType = node.Attributes["Type"].Value;
+                            var valType = "bool";   // Default for old settings files which may not have the type specified
+                            if (node.Attributes["Type"] != null)
+                            {
+                                valType = node.Attributes["Type"].Value;
+                            }
+
                             //var valName = node.Attributes["Name"].Value;
                             var val = node.Attributes["Value"].Value;
                             switch (valType)
@@ -116,7 +121,7 @@ namespace Common.ViewModels
                                             break;
                                     }
                                     break;
-                                case "boolean":
+                                case "bool":
                                     prop.SetValue(this, val);
                                     break;
                                 case "int":
@@ -124,6 +129,7 @@ namespace Common.ViewModels
                                     prop.SetValue(this, num);
                                     break;
                                 default:
+                                    prop.SetValue(this, val);
                                     break;
                             }
                         }
