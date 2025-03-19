@@ -11,7 +11,8 @@ namespace Common.ViewModels
     {
         // These fields must be set by the MainVM 
         protected AssemblyInfo AssyInfo;
-        protected string UserAppDataPath;
+        protected string UserRoamingPath;
+        protected string UserLocalPath;
         protected string ProgramAppPath;
         protected string SettingsFilePath;
 
